@@ -3,29 +3,42 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#6e1f1f" />
-  <meta name="description" content="Itinerário dos 40 Dias com São Miguel Arcanjo 2026 - leitor digital e diário espiritual." />
+  <meta name="theme-color" content="#5a1e1f" />
+  <meta name="description" content="Itinerário dos 40 Dias com São Miguel Arcanjo 2026 - versão digital para celular, com diário espiritual e leitura organizada por dia." />
+  <title>40 Dias com São Miguel – 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="icon" href="assets/icon-192.png" />
   <link rel="apple-touch-icon" href="assets/icon-192.png" />
   <link rel="stylesheet" href="styles.css" />
-  <title>40 Dias com São Miguel - 2026</title>
 </head>
 <body>
   <div id="loginScreen" class="login-screen hidden">
-    <div class="login-card">
-      <img src="assets/cover.jpg" alt="Capa do Itinerário 40 Dias com São Miguel Arcanjo 2026" />
-      <div class="login-content">
-        <span class="eyebrow">ACESSO PRIVADO</span>
-        <h1>40 Dias com São Miguel</h1>
-        <p>Entre para continuar sua caminhada e acessar seu diário espiritual.</p>
-        <form id="loginForm">
-          <label>E-mail<input id="email" type="email" autocomplete="email" required /></label>
-          <label>Senha<input id="password" type="password" autocomplete="current-password" required minlength="6" /></label>
+    <div class="login-shell">
+      <div class="login-visual">
+        <img src="assets/cover.jpg" alt="Capa do itinerário" />
+      </div>
+      <div class="login-card">
+        <span class="eyebrow">ACESSO</span>
+        <h1>40 Dias com<br>São Miguel Arcanjo</h1>
+        <p>Acesse seu itinerário digital, acompanhe os 40 dias e registre seu diário espiritual.</p>
+        <form id="loginForm" class="login-form">
+          <label>
+            <span>E-mail</span>
+            <input id="email" type="email" autocomplete="email" required />
+          </label>
+          <label>
+            <span>Senha</span>
+            <input id="password" type="password" autocomplete="current-password" required minlength="6" />
+          </label>
           <button class="primary" type="submit">Entrar</button>
         </form>
-        <button id="signupBtn" class="ghost hidden" type="button">Criar minha conta</button>
-        <button id="personalModeBtn" class="ghost hidden" type="button">Usar somente neste aparelho</button>
+        <div class="login-actions">
+          <button id="signupBtn" class="ghost hidden" type="button">Criar minha conta</button>
+          <button id="personalModeBtn" class="ghost hidden" type="button">Usar apenas neste aparelho</button>
+        </div>
         <p id="loginMsg" class="status-msg"></p>
       </div>
     </div>
@@ -33,17 +46,27 @@
 
   <div id="app" class="app-shell hidden">
     <header class="topbar">
-      <button id="menuBtn" class="icon-btn" aria-label="Abrir menu">☰</button>
-      <div class="brand"><span>40 DIAS</span><strong>SÃO MIGUEL</strong></div>
-      <button id="installBtn" class="icon-btn install hidden" aria-label="Instalar no celular">＋</button>
+      <div class="topbar-left">
+        <button id="menuBtn" class="icon-btn" aria-label="Abrir menu">☰</button>
+        <div class="brand">
+          <small>ITINERÁRIO 2026</small>
+          <strong>40 Dias com São Miguel</strong>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <button id="installBtn" class="icon-btn hidden" aria-label="Instalar">＋</button>
+      </div>
     </header>
 
     <aside id="drawer" class="drawer">
       <div class="drawer-head">
-        <img src="assets/cover.jpg" alt="Capa" />
-        <div><strong>Itinerário 2026</strong><small id="accountLabel">Modo pessoal</small></div>
+        <img src="assets/cover.jpg" alt="Capa do itinerário" />
+        <div>
+          <strong>Itinerário 2026</strong>
+          <small id="accountLabel">Modo pessoal</small>
+        </div>
       </div>
-      <nav>
+      <nav class="drawer-nav">
         <button data-view="home" class="nav-item active">⌂ <span>Início</span></button>
         <button data-view="journey" class="nav-item">✦ <span>Os 40 dias</span></button>
         <button data-view="book" class="nav-item">▤ <span>Livro e orações</span></button>
@@ -52,85 +75,169 @@
       </nav>
       <div class="drawer-foot">
         <button id="logoutBtn" class="nav-item hidden">⇥ <span>Sair</span></button>
-        <small>Conteúdo do exemplar digital fornecido pelo proprietário.</small>
+        <small>Conteúdo digital do exemplar fornecido pelo proprietário.</small>
       </div>
     </aside>
     <div id="scrim" class="scrim hidden"></div>
 
-    <main>
+    <main class="main-shell">
       <section id="homeView" class="view active">
-        <div class="hero">
-          <div class="hero-art"><img src="assets/cover.jpg" alt="São Miguel Arcanjo" /></div>
+        <div class="hero-card">
           <div class="hero-copy">
-            <span class="eyebrow">ITINERÁRIO 2026</span>
-            <h1>40 Dias com<br>São Miguel Arcanjo</h1>
+            <span class="eyebrow">JORNADA ESPIRITUAL</span>
+            <h1>Seu itinerário digital<br>mais bonito e fácil<br>de acessar no celular.</h1>
             <p id="journeyStatus">Preparando sua caminhada...</p>
-            <button id="continueBtn" class="primary">Continuar jornada</button>
+            <div class="hero-actions">
+              <button id="continueBtn" class="primary">Continuar jornada</button>
+              <button data-view-jump="journey" class="ghost">Ver os 40 dias</button>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <img src="assets/cover.jpg" alt="Capa do livro" />
           </div>
         </div>
-        <div class="progress-card">
-          <div class="progress-head"><strong>Minha caminhada</strong><span id="progressText">0 de 40</span></div>
-          <div class="progress-track"><div id="progressFill"></div></div>
-          <div class="stats">
-            <div><b id="doneCount">0</b><span>concluídos</span></div>
-            <div><b id="todayDay">—</b><span>dia atual</span></div>
-            <div><b>40</b><span>dias</span></div>
-          </div>
+
+        <div class="summary-grid">
+          <article class="summary-card progress-card">
+            <div class="section-minihead">
+              <span>Minha caminhada</span>
+              <strong id="progressText">0 de 40</strong>
+            </div>
+            <div class="progress-track"><div id="progressFill"></div></div>
+            <div class="stats-row">
+              <div><b id="doneCount">0</b><small>dias concluídos</small></div>
+              <div><b id="todayDay">—</b><small>dia atual</small></div>
+              <div><b>40</b><small>dias no total</small></div>
+            </div>
+          </article>
+
+          <article class="summary-card current-card">
+            <div class="section-minihead">
+              <span>Leitura sugerida</span>
+              <strong id="suggestedDayLabel">Dia atual</strong>
+            </div>
+            <div id="suggestedDayThumb" class="current-thumb"></div>
+            <div class="current-info">
+              <h3 id="suggestedDayTitle">01º dia</h3>
+              <p id="suggestedDayMeta">15 de agosto · sábado</p>
+            </div>
+            <button id="openSuggestedDay" class="primary">Abrir leitura</button>
+          </article>
         </div>
-        <div class="quick-grid">
-          <button data-open-section="preparacao"><span>🙏</span><b>Preparação</b><small>Pedidos, penitências e propósitos</small></button>
-          <button data-open-section="rosario"><span>📿</span><b>Santo Rosário</b><small>Orações e mistérios</small></button>
-          <button data-open-section="oracoes"><span>✝</span><b>Orações iniciais</b><small>Para todos os dias</small></button>
-          <button data-view-jump="journal"><span>✎</span><b>Meu diário</b><small>Reflexões e anotações</small></button>
+
+        <div class="quick-actions-grid">
+          <button class="feature-card" data-open-section="preparacao">
+            <span class="feature-icon">🙏</span>
+            <strong>Preparação</strong>
+            <small>Pedidos, penitências, propósitos e Grupo dos 72.</small>
+          </button>
+          <button class="feature-card" data-open-section="rosario">
+            <span class="feature-icon">📿</span>
+            <strong>Santo Rosário</strong>
+            <small>Como rezar, mistérios e orações iniciais.</small>
+          </button>
+          <button class="feature-card" data-view-jump="journal">
+            <span class="feature-icon">✎</span>
+            <strong>Meu diário</strong>
+            <small>Escreva o que Deus falou ao seu coração.</small>
+          </button>
+          <button class="feature-card" data-view-jump="book">
+            <span class="feature-icon">☩</span>
+            <strong>Livro completo</strong>
+            <small>Acesse as partes do material de forma organizada.</small>
+          </button>
         </div>
       </section>
 
       <section id="journeyView" class="view">
-        <div class="section-title"><span class="eyebrow">CAMINHADA</span><h2>Os 40 dias</h2><p>Toque em um dia para abrir exatamente as páginas correspondentes no seu livro.</p></div>
+        <div class="section-header">
+          <span class="eyebrow">CAMINHADA</span>
+          <h2>Os 40 dias</h2>
+          <p>Toque em qualquer dia para abrir as páginas correspondentes do livro, já prontas para leitura no celular.</p>
+        </div>
         <div id="daysGrid" class="days-grid"></div>
       </section>
 
       <section id="bookView" class="view">
-        <div class="section-title"><span class="eyebrow">BIBLIOTECA</span><h2>Livro e orações</h2><p>Acesso rápido às principais partes do seu exemplar.</p></div>
-        <div id="sectionsGrid" class="section-list"></div>
+        <div class="section-header">
+          <span class="eyebrow">BIBLIOTECA</span>
+          <h2>Livro e orações</h2>
+          <p>As principais partes do material organizadas de forma prática.</p>
+        </div>
+        <div id="sectionsGrid" class="section-grid"></div>
       </section>
 
       <section id="journalView" class="view">
-        <div class="section-title"><span class="eyebrow">DIÁRIO ESPIRITUAL</span><h2>Minhas anotações</h2><p>Escolha um dia. No modo com login, estas anotações ficam vinculadas apenas à sua conta.</p></div>
-        <div class="journal-picker"><label>Dia<select id="journalDay"></select></label><span id="journalDate"></span></div>
-        <div class="journal-fields">
-          <label>O que mais me marcou hoje?<textarea id="reflection" rows="5"></textarea></label>
-          <label>Intenções particulares para a Santa Missa<textarea id="massIntention" rows="4"></textarea></label>
-          <label>Propósito do dia<textarea id="purpose" rows="4"></textarea></label>
-          <label>O que Deus me falou neste Rosário?<textarea id="rosaryNote" rows="5"></textarea></label>
+        <div class="section-header">
+          <span class="eyebrow">DIÁRIO ESPIRITUAL</span>
+          <h2>Minhas anotações</h2>
+          <p>Escolha um dia para salvar suas reflexões, intenções e propósitos.</p>
+        </div>
+        <div class="card surface-card">
+          <div class="journal-picker">
+            <label>Dia<select id="journalDay"></select></label>
+            <span id="journalDate"></span>
+          </div>
+          <div class="form-grid">
+            <label>O que mais me marcou hoje?<textarea id="reflection" rows="5"></textarea></label>
+            <label>Intenções particulares para a Santa Missa<textarea id="massIntention" rows="4"></textarea></label>
+            <label>Propósito do dia<textarea id="purpose" rows="4"></textarea></label>
+            <label>O que Deus me falou neste Rosário?<textarea id="rosaryNote" rows="5"></textarea></label>
+          </div>
           <label class="checkline"><input id="completed" type="checkbox" /> Marcar este dia como concluído</label>
-          <button id="saveJournal" class="primary">Salvar diário</button>
-          <p id="journalMsg" class="status-msg"></p>
+          <div class="form-actions">
+            <button id="saveJournal" class="primary">Salvar diário</button>
+            <p id="journalMsg" class="status-msg"></p>
+          </div>
         </div>
       </section>
 
       <section id="prepView" class="view">
-        <div class="section-title"><span class="eyebrow">ANTES DE COMEÇAR</span><h2>Minha preparação</h2><p>Registre aqui suas intenções para acompanhar toda a caminhada.</p></div>
-        <div class="journal-fields">
-          <label>Meus pedidos de oração<textarea id="prayerRequests" rows="6"></textarea></label>
-          <label>Minhas penitências<textarea id="penances" rows="5"></textarea></label>
-          <label>O que preciso melhorar?<textarea id="improvements" rows="5"></textarea></label>
-          <label>Meus propósitos para os 40 dias<textarea id="generalPurpose" rows="6"></textarea></label>
-          <button id="savePrep" class="primary">Salvar preparação</button>
-          <p id="prepMsg" class="status-msg"></p>
+        <div class="section-header">
+          <span class="eyebrow">ANTES DE COMEÇAR</span>
+          <h2>Minha preparação</h2>
+          <p>Registre aqui o que deseja viver ao longo da jornada.</p>
+        </div>
+        <div class="card surface-card">
+          <div class="form-grid">
+            <label>Meus pedidos de oração<textarea id="prayerRequests" rows="6"></textarea></label>
+            <label>Minhas penitências<textarea id="penances" rows="5"></textarea></label>
+            <label>O que preciso melhorar?<textarea id="improvements" rows="5"></textarea></label>
+            <label>Meus propósitos para os 40 dias<textarea id="generalPurpose" rows="6"></textarea></label>
+          </div>
+          <div class="form-actions">
+            <button id="savePrep" class="primary">Salvar preparação</button>
+            <p id="prepMsg" class="status-msg"></p>
+          </div>
         </div>
       </section>
 
       <section id="readerView" class="view reader-view">
-        <div class="reader-toolbar">
-          <button id="backFromReader" class="ghost">← Voltar</button>
-          <div><strong id="readerTitle">Leitura</strong><small id="readerSubtitle"></small></div>
-          <a id="openPdfBtn" class="ghost" href="#" target="_blank" rel="noopener">Tela cheia ↗</a>
+        <div class="reader-header card">
+          <div class="reader-head-top">
+            <button id="backFromReader" class="ghost">← Voltar</button>
+            <button id="toggleFullscreen" class="ghost">Tela cheia ↗</button>
+          </div>
+          <div class="reader-title-wrap">
+            <div>
+              <h2 id="readerTitle">Leitura</h2>
+              <p id="readerSubtitle">Páginas</p>
+            </div>
+            <div class="reader-badges">
+              <span id="readerRangeBadge" class="badge">0 páginas</span>
+              <span id="readerKindBadge" class="badge">Livro</span>
+            </div>
+          </div>
+          <div class="reader-actions">
+            <button id="openDayJournal" class="primary hidden">✎ Escrever no diário deste dia</button>
+            <button id="markDoneReader" class="ghost hidden">✓ Marcar como concluído</button>
+            <button id="prevReaderItem" class="ghost hidden">← Dia anterior</button>
+            <button id="nextReaderItem" class="ghost hidden">Próximo dia →</button>
+          </div>
         </div>
-        <div class="pdf-wrap"><iframe id="pdfFrame" title="Leitor do livro"></iframe></div>
-        <div id="readerJournalShortcut" class="reader-journal hidden">
-          <button id="openDayJournal" class="primary">✎ Escrever no diário deste dia</button>
-          <button id="markDoneReader" class="ghost">✓ Marcar como concluído</button>
+
+        <div id="readerStage" class="reader-stage">
+          <div id="pageGallery" class="page-gallery"></div>
         </div>
       </section>
     </main>
