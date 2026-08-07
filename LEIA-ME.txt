@@ -1,0 +1,23 @@
+ITINERÁRIO DOS 40 DIAS COM SÃO MIGUEL ARCANJO 2026 - VERSÃO DIGITAL
+
+O que já está pronto
+- O PDF de 424 páginas foi separado em arquivos menores para carregar melhor no celular.
+- Os 40 dias estão mapeados às páginas reais do livro e às datas de 2026.
+- Acesso rápido a preparação, Rosário, orações iniciais, introduções semanais e conteúdo complementar.
+- Diário espiritual por dia, marcação de progresso e preparação pessoal.
+- Pode ser instalado na tela inicial do celular como PWA.
+
+MODO PESSOAL (funciona imediatamente)
+Abra o site por um servidor web. O diário fica salvo no navegador do aparelho (localStorage).
+
+MODO COM LOGIN INDIVIDUAL (recomendado para várias pessoas)
+1. Crie um projeto no Supabase.
+2. Execute supabase-schema.sql no SQL Editor.
+3. Em Authentication, configure os usuários (ou habilite cadastro, se desejar).
+4. Edite config.js e preencha SUPABASE_URL e SUPABASE_ANON_KEY.
+5. Defina REQUIRE_LOGIN: true.
+6. Publique a pasta inteira em um host estático com HTTPS (Netlify, Cloudflare Pages, Vercel etc.).
+
+IMPORTANTE
+- Para acesso privado de várias pessoas ao conteúdo integral do livro, confirme que você possui autorização de distribuição da obra além da compra do exemplar.
+- Não remova a pasta book: ela contém o material do livro organizado para leitura móvel.

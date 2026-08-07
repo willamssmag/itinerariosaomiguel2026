@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#6e1f1f" />
+  <meta name="description" content="Itinerário dos 40 Dias com São Miguel Arcanjo 2026 - leitor digital e diário espiritual." />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="assets/icon-192.png" />
+  <link rel="apple-touch-icon" href="assets/icon-192.png" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>40 Dias com São Miguel - 2026</title>
+</head>
+<body>
+  <div id="loginScreen" class="login-screen hidden">
+    <div class="login-card">
+      <img src="assets/cover.jpg" alt="Capa do Itinerário 40 Dias com São Miguel Arcanjo 2026" />
+      <div class="login-content">
+        <span class="eyebrow">ACESSO PRIVADO</span>
+        <h1>40 Dias com São Miguel</h1>
+        <p>Entre para continuar sua caminhada e acessar seu diário espiritual.</p>
+        <form id="loginForm">
+          <label>E-mail<input id="email" type="email" autocomplete="email" required /></label>
+          <label>Senha<input id="password" type="password" autocomplete="current-password" required minlength="6" /></label>
+          <button class="primary" type="submit">Entrar</button>
+        </form>
+        <button id="signupBtn" class="ghost hidden" type="button">Criar minha conta</button>
+        <button id="personalModeBtn" class="ghost hidden" type="button">Usar somente neste aparelho</button>
+        <p id="loginMsg" class="status-msg"></p>
+      </div>
+    </div>
+  </div>
+
+  <div id="app" class="app-shell hidden">
+    <header class="topbar">
+      <button id="menuBtn" class="icon-btn" aria-label="Abrir menu">☰</button>
+      <div class="brand"><span>40 DIAS</span><strong>SÃO MIGUEL</strong></div>
+      <button id="installBtn" class="icon-btn install hidden" aria-label="Instalar no celular">＋</button>
+    </header>
+
+    <aside id="drawer" class="drawer">
+      <div class="drawer-head">
+        <img src="assets/cover.jpg" alt="Capa" />
+        <div><strong>Itinerário 2026</strong><small id="accountLabel">Modo pessoal</small></div>
+      </div>
+      <nav>
+        <button data-view="home" class="nav-item active">⌂ <span>Início</span></button>
+        <button data-view="journey" class="nav-item">✦ <span>Os 40 dias</span></button>
+        <button data-view="book" class="nav-item">▤ <span>Livro e orações</span></button>
+        <button data-view="journal" class="nav-item">✎ <span>Meu diário</span></button>
+        <button data-view="prep" class="nav-item">♡ <span>Minha preparação</span></button>
+      </nav>
+      <div class="drawer-foot">
+        <button id="logoutBtn" class="nav-item hidden">⇥ <span>Sair</span></button>
+        <small>Conteúdo do exemplar digital fornecido pelo proprietário.</small>
+      </div>
+    </aside>
+    <div id="scrim" class="scrim hidden"></div>
+
+    <main>
+      <section id="homeView" class="view active">
+        <div class="hero">
+          <div class="hero-art"><img src="assets/cover.jpg" alt="São Miguel Arcanjo" /></div>
+          <div class="hero-copy">
+            <span class="eyebrow">ITINERÁRIO 2026</span>
+            <h1>40 Dias com<br>São Miguel Arcanjo</h1>
+            <p id="journeyStatus">Preparando sua caminhada...</p>
+            <button id="continueBtn" class="primary">Continuar jornada</button>
+          </div>
+        </div>
+        <div class="progress-card">
+          <div class="progress-head"><strong>Minha caminhada</strong><span id="progressText">0 de 40</span></div>
+          <div class="progress-track"><div id="progressFill"></div></div>
+          <div class="stats">
+            <div><b id="doneCount">0</b><span>concluídos</span></div>
+            <div><b id="todayDay">—</b><span>dia atual</span></div>
+            <div><b>40</b><span>dias</span></div>
+          </div>
+        </div>
+        <div class="quick-grid">
+          <button data-open-section="preparacao"><span>🙏</span><b>Preparação</b><small>Pedidos, penitências e propósitos</small></button>
+          <button data-open-section="rosario"><span>📿</span><b>Santo Rosário</b><small>Orações e mistérios</small></button>
+          <button data-open-section="oracoes"><span>✝</span><b>Orações iniciais</b><small>Para todos os dias</small></button>
+          <button data-view-jump="journal"><span>✎</span><b>Meu diário</b><small>Reflexões e anotações</small></button>
+        </div>
+      </section>
+
+      <section id="journeyView" class="view">
+        <div class="section-title"><span class="eyebrow">CAMINHADA</span><h2>Os 40 dias</h2><p>Toque em um dia para abrir exatamente as páginas correspondentes no seu livro.</p></div>
+        <div id="daysGrid" class="days-grid"></div>
+      </section>
+
+      <section id="bookView" class="view">
+        <div class="section-title"><span class="eyebrow">BIBLIOTECA</span><h2>Livro e orações</h2><p>Acesso rápido às principais partes do seu exemplar.</p></div>
+        <div id="sectionsGrid" class="section-list"></div>
+      </section>
+
+      <section id="journalView" class="view">
+        <div class="section-title"><span class="eyebrow">DIÁRIO ESPIRITUAL</span><h2>Minhas anotações</h2><p>Escolha um dia. No modo com login, estas anotações ficam vinculadas apenas à sua conta.</p></div>
+        <div class="journal-picker"><label>Dia<select id="journalDay"></select></label><span id="journalDate"></span></div>
+        <div class="journal-fields">
+          <label>O que mais me marcou hoje?<textarea id="reflection" rows="5"></textarea></label>
+          <label>Intenções particulares para a Santa Missa<textarea id="massIntention" rows="4"></textarea></label>
+          <label>Propósito do dia<textarea id="purpose" rows="4"></textarea></label>
+          <label>O que Deus me falou neste Rosário?<textarea id="rosaryNote" rows="5"></textarea></label>
+          <label class="checkline"><input id="completed" type="checkbox" /> Marcar este dia como concluído</label>
+          <button id="saveJournal" class="primary">Salvar diário</button>
+          <p id="journalMsg" class="status-msg"></p>
+        </div>
+      </section>
+
+      <section id="prepView" class="view">
+        <div class="section-title"><span class="eyebrow">ANTES DE COMEÇAR</span><h2>Minha preparação</h2><p>Registre aqui suas intenções para acompanhar toda a caminhada.</p></div>
+        <div class="journal-fields">
+          <label>Meus pedidos de oração<textarea id="prayerRequests" rows="6"></textarea></label>
+          <label>Minhas penitências<textarea id="penances" rows="5"></textarea></label>
+          <label>O que preciso melhorar?<textarea id="improvements" rows="5"></textarea></label>
+          <label>Meus propósitos para os 40 dias<textarea id="generalPurpose" rows="6"></textarea></label>
+          <button id="savePrep" class="primary">Salvar preparação</button>
+          <p id="prepMsg" class="status-msg"></p>
+        </div>
+      </section>
+
+      <section id="readerView" class="view reader-view">
+        <div class="reader-toolbar">
+          <button id="backFromReader" class="ghost">← Voltar</button>
+          <div><strong id="readerTitle">Leitura</strong><small id="readerSubtitle"></small></div>
+          <a id="openPdfBtn" class="ghost" href="#" target="_blank" rel="noopener">Tela cheia ↗</a>
+        </div>
+        <div class="pdf-wrap"><iframe id="pdfFrame" title="Leitor do livro"></iframe></div>
+        <div id="readerJournalShortcut" class="reader-journal hidden">
+          <button id="openDayJournal" class="primary">✎ Escrever no diário deste dia</button>
+          <button id="markDoneReader" class="ghost">✓ Marcar como concluído</button>
+        </div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav">
+      <button data-view="home" class="active">⌂<span>Início</span></button>
+      <button data-view="journey">✦<span>40 dias</span></button>
+      <button data-view="book">▤<span>Livro</span></button>
+      <button data-view="journal">✎<span>Diário</span></button>
+    </nav>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="days.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js"></script>
+</body>
+</html>
