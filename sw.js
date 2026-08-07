@@ -1,5 +1,8 @@
-const CACHE_NAME='sao-miguel-v3-text';
-const APP_SHELL=['./','./index.html','./styles.css','./app.js','./days.js','./transcription.js','./config.js','./manifest.webmanifest','./assets/cover.jpg','./assets/icon-192.png','./assets/icon-512.png'];
+const CACHE_NAME='sao-miguel-v4-premium';
+const APP_SHELL=[
+  './','./index.html','./styles.css','./app.js','./days.js','./transcription.js','./config.js','./manifest.webmanifest',
+  './assets/cover.jpg','./assets/cover-bg.jpg','./assets/cover-premium-4k.jpg','./assets/icon-192.png','./assets/icon-512.png'
+];
 self.addEventListener('install',event=>{
   event.waitUntil(caches.open(CACHE_NAME).then(cache=>cache.addAll(APP_SHELL)).then(()=>self.skipWaiting()));
 });

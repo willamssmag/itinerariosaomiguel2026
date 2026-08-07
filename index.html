@@ -4,26 +4,30 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#5a1e1f" />
-  <meta name="description" content="Itinerário dos 40 Dias com São Miguel Arcanjo 2026 - versão digital para celular, com diário espiritual e leitura organizada por dia." />
+  <meta name="description" content="Itinerário dos 40 Dias com São Miguel Arcanjo 2026 - versão digital premium para celular, com diário espiritual e leitura organizada por dia." />
   <title>40 Dias com São Miguel – 2026</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="icon" href="assets/icon-192.png" />
   <link rel="apple-touch-icon" href="assets/icon-192.png" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <div class="ambient-glow ambient-left"></div>
+  <div class="ambient-glow ambient-right"></div>
+
   <div id="loginScreen" class="login-screen hidden">
     <div class="login-shell">
       <div class="login-visual">
         <img src="assets/cover.jpg" alt="Capa do itinerário" />
+        <div class="login-visual-overlay"></div>
       </div>
       <div class="login-card">
-        <span class="eyebrow">ACESSO</span>
+        <span class="eyebrow">ACESSO AO ITINERÁRIO</span>
         <h1>40 Dias com<br>São Miguel Arcanjo</h1>
-        <p>Acesse seu itinerário digital, acompanhe os 40 dias e registre seu diário espiritual.</p>
+        <p>Uma versão digital premium do seu livro, com leitura organizada, acompanhamento da caminhada e diário espiritual pessoal.</p>
         <form id="loginForm" class="login-form">
           <label>
             <span>E-mail</span>
@@ -48,9 +52,12 @@
     <header class="topbar">
       <div class="topbar-left">
         <button id="menuBtn" class="icon-btn" aria-label="Abrir menu">☰</button>
-        <div class="brand">
-          <small>ITINERÁRIO 2026</small>
-          <strong>40 Dias com São Miguel</strong>
+        <div class="brand-block">
+          <img class="brand-mark" src="assets/icon-192.png" alt="São Miguel" />
+          <div class="brand">
+            <small>ITINERÁRIO 2026</small>
+            <strong>40 Dias com São Miguel</strong>
+          </div>
         </div>
       </div>
       <div class="topbar-right">
@@ -64,6 +71,7 @@
         <div>
           <strong>Itinerário 2026</strong>
           <small id="accountLabel">Modo pessoal</small>
+          <p class="drawer-quote">“Sob a proteção de São Miguel Arcanjo, permaneça firme no combate.”</p>
         </div>
       </div>
       <nav class="drawer-nav">
@@ -85,15 +93,23 @@
         <div class="hero-card">
           <div class="hero-copy">
             <span class="eyebrow">JORNADA ESPIRITUAL</span>
-            <h1>Seu itinerário digital<br>mais bonito e fácil<br>de acessar no celular.</h1>
+            <div class="hero-ribbon">Quaresma de São Miguel · 2026</div>
+            <h1>Uma experiência digital<br>mais nobre, mais bela<br>e mais fácil de acessar.</h1>
             <p id="journeyStatus">Preparando sua caminhada...</p>
             <div class="hero-actions">
               <button id="continueBtn" class="primary">Continuar jornada</button>
               <button data-view-jump="journey" class="ghost">Ver os 40 dias</button>
             </div>
+            <div class="hero-badges">
+              <span class="badge premium">✦ Leitura organizada</span>
+              <span class="badge premium">✎ Diário espiritual</span>
+              <span class="badge premium">☩ Visual inspirado na capa</span>
+            </div>
           </div>
           <div class="hero-visual">
-            <img src="assets/cover.jpg" alt="Capa do livro" />
+            <div class="hero-cover-frame">
+              <img src="assets/cover.jpg" alt="Capa do livro" />
+            </div>
           </div>
         </div>
 
@@ -127,7 +143,7 @@
 
         <div class="quick-actions-grid">
           <button class="feature-card" data-open-section="preparacao">
-            <span class="feature-icon">🙏</span>
+            <span class="feature-icon">🕯️</span>
             <strong>Preparação</strong>
             <small>Pedidos, penitências, propósitos e Grupo dos 72.</small>
           </button>
@@ -142,7 +158,7 @@
             <small>Escreva o que Deus falou ao seu coração.</small>
           </button>
           <button class="feature-card" data-view-jump="book">
-            <span class="feature-icon">☩</span>
+            <span class="feature-icon">⚔️</span>
             <strong>Livro completo</strong>
             <small>Acesse as partes do material de forma organizada.</small>
           </button>
@@ -153,7 +169,7 @@
         <div class="section-header">
           <span class="eyebrow">CAMINHADA</span>
           <h2>Os 40 dias</h2>
-          <p>Toque em qualquer dia para abrir as páginas correspondentes do livro, já prontas para leitura no celular.</p>
+          <p>Toque em qualquer dia para abrir a leitura transcrita do livro com um visual mais elegante e confortável.</p>
         </div>
         <div id="daysGrid" class="days-grid"></div>
       </section>
