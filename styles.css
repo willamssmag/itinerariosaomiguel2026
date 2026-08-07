@@ -265,3 +265,95 @@ label{display:grid;gap:8px;color:var(--muted);font-size:.95rem}
   .stats-row{grid-template-columns:1fr}
   .reader-head-top,.reader-title-wrap,.journal-picker{display:grid}
 }
+
+/* Leitor textual transcrito */
+.transcribed-page{
+  background:#fffdf9;
+  border:1px solid #ead9c7;
+  border-radius:24px;
+  box-shadow:var(--shadow);
+  padding:clamp(22px,4vw,46px);
+  max-width:860px;
+  width:100%;
+  margin:0 auto;
+}
+.transcribed-page + .transcribed-page{margin-top:20px}
+.transcribed-page-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding-bottom:16px;
+  margin-bottom:24px;
+  border-bottom:1px solid #eadfD3;
+}
+.transcribed-page-head strong{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:1.65rem;
+  color:#3a211d;
+}
+.transcribed-page-head span{
+  font-size:.8rem;
+  color:var(--wine);
+  background:#f7ead8;
+  padding:7px 10px;
+  border-radius:999px;
+  font-weight:700;
+}
+.transcribed-content{
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:clamp(1.04rem,2vw,1.16rem);
+  line-height:1.78;
+  color:#2b2320;
+}
+.transcribed-content p{margin:0 0 1em}
+.transcribed-content .ocr-heading{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:clamp(1.55rem,3vw,2.1rem);
+  line-height:1.08;
+  font-weight:700;
+  color:#4b211f;
+  margin:1.15em 0 .55em;
+  letter-spacing:.01em;
+}
+.transcribed-content .ocr-subheading{
+  font-weight:700;
+  color:#4a2c26;
+  margin:1.05em 0 .5em;
+}
+.transcribed-content .ocr-line{margin:.28em 0}
+.ocr-note{
+  margin-top:20px;
+  font-family:'Inter',system-ui,sans-serif;
+  font-size:.82rem;
+  line-height:1.5;
+  color:#7a6d67;
+  border-top:1px dashed #dfd0c4;
+  padding-top:14px;
+}
+.reader-stage:fullscreen{
+  background:#efe6dc;
+  overflow:auto;
+  padding:24px;
+}
+.day-thumb-design{
+  display:grid;
+  place-items:center;
+  align-content:center;
+  gap:4px;
+  color:#fff;
+  background:
+    radial-gradient(circle at 75% 20%,rgba(212,177,112,.38),transparent 28%),
+    linear-gradient(145deg,#42191a,#7b2f2b 58%,#9a6844);
+  min-height:180px;
+}
+.day-thumb-design span{font-size:1.4rem;color:#e8c98f}
+.day-thumb-design b{font-family:'Cormorant Garamond',Georgia,serif;font-size:4.2rem;line-height:.9}
+.day-thumb-design small{font-size:.7rem;letter-spacing:.22em;opacity:.82}
+.section-thumb-design{background:#ead9c5;display:grid;place-items:center}
+.section-thumb-design img{width:100%;height:100%;object-fit:cover}
+.current-thumb{display:grid;place-items:center;background:linear-gradient(145deg,#42191a,#7b2f2b 58%,#9a6844)}
+.suggested-design{display:grid;place-items:center;align-content:center;color:#fff;height:100%;width:100%;gap:4px}
+.suggested-design span{font-size:1.5rem;color:#e8c98f}
+.suggested-design b{font-family:'Cormorant Garamond',Georgia,serif;font-size:4.6rem;line-height:.95}
+.suggested-design small{font-size:.72rem;letter-spacing:.2em;opacity:.82}

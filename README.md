@@ -1,22 +1,25 @@
-# 40 Dias com São Miguel – 2026 (Versão Digital V2)
+# 40 Dias com São Miguel – 2026 | Versão V3 transcrita
 
-## O que mudou nesta versão
-- Corrigido o problema das páginas vazias / 404.
-- Leitura agora é feita por imagens das páginas do livro, e não por iframe PDF.
-- Visual totalmente redesenhado, com aparência mais refinada para celular.
-- Melhor experiência de leitura e navegação entre os 40 dias.
+Esta versão não depende mais dos PDFs nem da pasta de imagens de páginas para exibir o conteúdo.
 
-## Estrutura principal
-- `pages/` → páginas do livro em JPG.
-- `assets/` → capa e ícones.
-- `days.js` → mapeamento dos 40 dias.
-- `app.js` → lógica do site.
-- `config.js` → configuração opcional do Supabase.
+## Correção principal
+As 424 páginas do exemplar fornecido foram convertidas em texto digital e armazenadas em `transcription.js`. O leitor do site monta cada página diretamente em HTML, portanto não deve mais aparecer página vazia por arquivo JPG/PDF ausente na Vercel.
+
+## Arquivos importantes
+- `index.html` – estrutura do site.
+- `styles.css` – visual responsivo.
+- `app.js` – navegação, leitor e diário.
+- `days.js` – mapa dos 40 dias.
+- `transcription.js` – transcrição das 424 páginas.
+- `config.js` – configuração opcional do Supabase.
+- `supabase-schema.sql` – estrutura do banco para login/diário.
+- `assets/` – capa e ícones.
 
 ## Publicar na Vercel
-1. Envie **todos os arquivos e pastas**, incluindo `pages/`.
-2. Faça o deploy como projeto estático.
-3. Se quiser login real, edite `config.js` e configure o Supabase.
+Envie todo o conteúdo desta pasta para o repositório e faça um novo deploy. Não é necessário enviar a pasta `pages/` nem os PDFs antigos.
 
-## Observação
-Esta versão foi preparada para uso privado do exemplar digital fornecido pelo proprietário.
+## Cache
+O service worker foi alterado para `sao-miguel-v3-text`; isso força a nova versão a substituir o cache anterior.
+
+## Observação sobre a transcrição
+O PDF original é composto por páginas digitalizadas, sem camada de texto. A transcrição foi feita por reconhecimento de texto e pode conter pequenas diferenças de acentuação, pontuação ou palavras em relação à impressão. O conteúdo pode ser revisado página a página posteriormente.

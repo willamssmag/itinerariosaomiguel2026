@@ -188,7 +188,7 @@ function renderDays(){
     if(completed.has(d.day)) tags.push('<span class="done-pill">Concluído</span>');
     if(isSameDate(today, new Date(`${d.date}T12:00:00`))) tags.push('<span class="today-pill">Hoje</span>');
     btn.innerHTML = `
-      <div class="day-thumb" style="background-image:url('${pagePath(d.startPage)}')"></div>
+      <div class="day-thumb day-thumb-design"><span>✦</span><b>${String(d.day).padStart(2,'0')}</b><small>40 DIAS</small></div>
       <div class="day-topline">
         <strong>${String(d.day).padStart(2,'0')}º dia</strong>
         <span class="date-chip">${d.startPage}–${d.endPage}</span>
@@ -211,7 +211,7 @@ function renderSections(){
     const btn = document.createElement('button');
     btn.className = 'section-card';
     btn.innerHTML = `
-      <div class="section-thumb" style="background-image:url('${pagePath(s.thumbPage)}')"></div>
+      <div class="section-thumb section-thumb-design"><img src="assets/cover.jpg" alt="Capa do itinerário" /></div>
       <div>
         <h3>${s.title}</h3>
         <p>${s.subtitle}</p>
@@ -272,17 +272,65 @@ function openReader(ctx){
   switchView('reader');
 }
 
+function escapeHtml(value){
+  return String(value ?? '')
+    .replaceAll('&','&amp;')
+    .replaceAll('<','&lt;')
+    .replaceAll('>','&gt;')
+    .replaceAll('\"','&quot;')
+    .replaceAll("'",'&#039;');
+}
+
+function formatTranscription(text){
+  if(!text) return '<p>Conteúdo não disponível nesta página.</p>';
+  const lines = String(text)
+    .replace(/\r/g,'')
+    .split('\n')
+    .map(line => line.replace(/\s+/g,' ').trim());
+
+  const blocks = [];
+  let paragraph = [];
+  const flush = ()=>{
+    if(!paragraph.length) return;
+    blocks.push(`<p>${escapeHtml(paragraph.join(' '))}</p>`);
+    paragraph = [];
+  };
+
+  for(const line of lines){
+    if(!line){ flush(); continue; }
+    const letters = line.replace(/[^A-Za-zÀ-ÿ]/g,'');
+    const upperLetters = letters.replace(/[^A-ZÀ-Þ]/g,'');
+    const upperRatio = letters.length ? upperLetters.length / letters.length : 0;
+    const looksHeading = line.length <= 90 && letters.length >= 4 && upperRatio > .72;
+    const looksSubheading = /^(TEMA|ORAÇÃO|MISTÉRIO|MISTÉRIOS|PRIMEIRA SEMANA|SEGUNDA SEMANA|TERCEIRA SEMANA|QUARTA SEMANA|QUINTA SEMANA|SEXTA SEMANA|SÉTIMA SEMANA|PROPÓSITO|MEDITAÇÃO|LADAINHA|CONSAGRAÇÃO|SALMO|EVANGELHO|REFLEXÃO)/i.test(line);
+    if(looksHeading || looksSubheading){
+      flush();
+      blocks.push(`<div class="${looksHeading ? 'ocr-heading' : 'ocr-subheading'}">${escapeHtml(line)}</div>`);
+    } else {
+      paragraph.push(line);
+      if(/[.!?…””]$/.test(line) && paragraph.join(' ').length > 300) flush();
+    }
+  }
+  flush();
+  return blocks.join('');
+}
+
 function renderPageGallery(startPage, endPage){
   const gallery = $('#pageGallery');
   gallery.innerHTML = '';
+  const transcription = window.SAO_MIGUEL_TRANSCRIPTION || {};
   for(let p = startPage; p <= endPage; p++){
-    const figure = document.createElement('figure');
-    figure.className = 'page-figure';
-    figure.innerHTML = `
-      <img src="${pagePath(p)}" alt="Página ${p} do itinerário" loading="lazy" decoding="async" />
-      <figcaption class="page-caption"><span>Página ${p}</span><span>Leitura digital</span></figcaption>
+    const article = document.createElement('article');
+    article.className = 'transcribed-page';
+    article.innerHTML = `
+      <header class="transcribed-page-head">
+        <strong>Página ${p}</strong>
+        <span>Texto digital</span>
+      </header>
+      <div class="transcribed-content">${formatTranscription(transcription[p])}</div>
+      <div class="ocr-note">Transcrição digitalizada do exemplar fornecido. Pequenas diferenças de acentuação ou pontuação podem ocorrer em relação à impressão.</div>
     `;
-    gallery.appendChild(figure);
+    gallery.appendChild(article);
   }
 }
 
@@ -326,7 +374,7 @@ function updateDashboard(){
     $('#suggestedDayLabel').textContent = `${String(sug.day).padStart(2,'0')}º dia`;
     $('#suggestedDayTitle').textContent = `${String(sug.day).padStart(2,'0')}º dia`;
     $('#suggestedDayMeta').textContent = `${sug.dateLabel} · ${sug.weekday} · páginas ${sug.startPage}–${sug.endPage}`;
-    $('#suggestedDayThumb').style.backgroundImage = `url('${pagePath(sug.startPage)}')`;
+    $('#suggestedDayThumb').innerHTML = `<div class="suggested-design"><span>✦</span><b>${String(sug.day).padStart(2,'0')}º</b><small>DIA DA JORNADA</small></div>`;
   }
 }
 
